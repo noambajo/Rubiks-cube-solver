@@ -7,5 +7,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 # releases the capture from the camera and frees up memory
+
 cap.release()
 cv2.destroyAllWindows()
