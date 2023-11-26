@@ -47,6 +47,7 @@ while True:
     MinVal = cv2.getTrackbarPos("MinVal", "Trackbars")
     MaxVal = cv2.getTrackbarPos("MaxVal", "Trackbars")
 
+
     gray = np.float32(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
     dst = cv2.cornerHarris(gray, 2, 3, 0.04)
     dst = cv2.dilate(dst, None)
