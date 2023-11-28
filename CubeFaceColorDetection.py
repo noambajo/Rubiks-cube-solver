@@ -1,13 +1,6 @@
 import cv2
 import numpy as np
 
-# YELLOW_MASK = cv2.inRange(hsv, np.array([22, 59, 35]), np.array([28, 252, 255]))
-# BLUE_MASK = cv2.inRange(hsv, np.array([108, 0, 115]), np.array([121, 255, 184]))
-# GREEN_MASK = cv2.inRange(hsv, np.array([73, 99, 81]), np.array([92, 255, 255]))
-# ORANGE_MASK = cv2.inRange(hsv, np.array([MinHue, MinSat, MinVal]), np.array([MaxHue, MaxSat, MaxVal]))
-
-# mask = cv2.bitwise_and(img, img, mask=ORANGE_MASK)
-
 
 def empty(a):
     pass
@@ -30,16 +23,13 @@ while True:
     success, img = cap.read()
     img = cv2.flip(img, 1)
     showingImage = img.copy()
-    mask = np.zeros(img.shape[:2], dtype="uint8")
-    cv2.rectangle(mask, (200, 150), (400, 350), 255, -1)
-    img = cv2.bitwise_and(img, img, mask=mask)
 
-    # cv2.line(showingImage, (200, 150), (200, 350), (0, 255, 0), 3)
-    # cv2.line(showingImage, (200, 150), (400, 150), (0, 255, 0), 3)
-    # cv2.line(showingImage, (200, 350), (400, 350), (0, 255, 0), 3)
-    # cv2.line(showingImage, (400, 350), (400, 150), (0, 255, 0), 3)
+    cv2.line(showingImage, (200, 150), (200, 350), (0, 255, 0), 3)
+    cv2.line(showingImage, (200, 150), (400, 150), (0, 255, 0), 3)
+    cv2.line(showingImage, (200, 350), (400, 350), (0, 255, 0), 3)
+    cv2.line(showingImage, (400, 350), (400, 150), (0, 255, 0), 3)
 
-    # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     MinHue = cv2.getTrackbarPos("MinHue", "Trackbars")
     MaxHue = cv2.getTrackbarPos("MaxHue", "Trackbars")
     MinSat = cv2.getTrackbarPos("MinSat", "Trackbars")
@@ -47,13 +37,17 @@ while True:
     MinVal = cv2.getTrackbarPos("MinVal", "Trackbars")
     MaxVal = cv2.getTrackbarPos("MaxVal", "Trackbars")
 
+    YELLOW_MASK = cv2.inRange(hsv, np.array([22, 59, 35]), np.array([28, 252, 255]))
+    BLUE_MASK = cv2.inRange(hsv, np.array([108, 0, 115]), np.array([121, 255, 184]))
+    GREEN_MASK = cv2.inRange(hsv, np.array([73, 99, 81]), np.array([92, 255, 255]))
+    ORANGE_MASK = cv2.inRange(hsv, np.array([MinHue, MinSat, MinVal]), np.array([MaxHue, MaxSat, MaxVal]))
 
-    gray = np.float32(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
-    dst = cv2.cornerHarris(gray, 2, 3, 0.04)
-    dst = cv2.dilate(dst, None)
-    img[dst > 0.01*dst.max()] = [0, 0, 255]
+    mask = np.zeros(img.shape[:2], dtype="uint8")
+    cv2.rectangle(mask, (200, 150), (400, 350), 255, -1)
+    img = cv2.bitwise_and(img, img, mask=mask)
+    img = cv2.bitwise_and(img, img, mask=YELLOW_MASK)
     cv2.imshow("Camera", showingImage)
-    cv2.imshow("Masked image", img)
+    cv2.imshow("img", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 cap.release()
