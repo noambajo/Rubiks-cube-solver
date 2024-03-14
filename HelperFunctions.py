@@ -96,13 +96,13 @@ def rotate_entre_face(net, face_color):
         for j in range(3):
             net[i+start_y][j+start_x] = rotated_face[i][j]
     adjacent_indices = {
-        4: [(graph_to_matrix(10, net), graph_to_matrix(13, net), graph_to_matrix(16, net), graph_to_matrix(54, net)),
-            (graph_to_matrix(11, net), graph_to_matrix(14, net), graph_to_matrix(17, net), graph_to_matrix(53, net)),
-            (graph_to_matrix(12, net), graph_to_matrix(15, net), graph_to_matrix(18, net), graph_to_matrix(52, net))],
+        -4: [(graph_to_matrix(10, net), graph_to_matrix(13, net), graph_to_matrix(16, net), graph_to_matrix(54, net)),
+             (graph_to_matrix(11, net), graph_to_matrix(14, net), graph_to_matrix(17, net), graph_to_matrix(53, net)),
+             (graph_to_matrix(12, net), graph_to_matrix(15, net), graph_to_matrix(18, net), graph_to_matrix(52, net))],
 
-        -4: [(graph_to_matrix(54, net), graph_to_matrix(16, net), graph_to_matrix(13, net), graph_to_matrix(10, net)),
-             (graph_to_matrix(53, net), graph_to_matrix(17, net), graph_to_matrix(14, net), graph_to_matrix(11, net)),
-             (graph_to_matrix(52, net), graph_to_matrix(18, net), graph_to_matrix(15, net), graph_to_matrix(12, net))],
+        4: [(graph_to_matrix(54, net), graph_to_matrix(16, net), graph_to_matrix(13, net), graph_to_matrix(10, net)),
+            (graph_to_matrix(53, net), graph_to_matrix(17, net), graph_to_matrix(14, net), graph_to_matrix(11, net)),
+            (graph_to_matrix(52, net), graph_to_matrix(18, net), graph_to_matrix(15, net), graph_to_matrix(12, net))],
 
         1: [(graph_to_matrix(1, net), graph_to_matrix(13, net), graph_to_matrix(37, net), graph_to_matrix(46, net)),
             (graph_to_matrix(4, net), graph_to_matrix(22, net), graph_to_matrix(40, net), graph_to_matrix(49, net)),
@@ -120,29 +120,29 @@ def rotate_entre_face(net, face_color):
              (graph_to_matrix(21, net), graph_to_matrix(38, net), graph_to_matrix(25, net), graph_to_matrix(8, net)),
              (graph_to_matrix(12, net), graph_to_matrix(37, net), graph_to_matrix(34, net), graph_to_matrix(9, net))],
 
-        0: [(graph_to_matrix(3, net), graph_to_matrix(15, net), graph_to_matrix(39, net), graph_to_matrix(48, net)),
-            (graph_to_matrix(6, net), graph_to_matrix(24, net), graph_to_matrix(42, net), graph_to_matrix(51, net)),
-            (graph_to_matrix(9, net), graph_to_matrix(33, net), graph_to_matrix(45, net), graph_to_matrix(54, net))],
+        -6: [(graph_to_matrix(3, net), graph_to_matrix(15, net), graph_to_matrix(39, net), graph_to_matrix(48, net)),
+             (graph_to_matrix(6, net), graph_to_matrix(24, net), graph_to_matrix(42, net), graph_to_matrix(51, net)),
+             (graph_to_matrix(9, net), graph_to_matrix(33, net), graph_to_matrix(45, net), graph_to_matrix(54, net))],
 
-        -6: [(graph_to_matrix(48, net), graph_to_matrix(39, net), graph_to_matrix(15, net), graph_to_matrix(3, net)),
-             (graph_to_matrix(51, net), graph_to_matrix(42, net), graph_to_matrix(24, net), graph_to_matrix(6, net)),
-             (graph_to_matrix(54, net), graph_to_matrix(45, net), graph_to_matrix(33, net), graph_to_matrix(9, net))],
+        0: [(graph_to_matrix(48, net), graph_to_matrix(39, net), graph_to_matrix(15, net), graph_to_matrix(3, net)),
+            (graph_to_matrix(51, net), graph_to_matrix(42, net), graph_to_matrix(24, net), graph_to_matrix(6, net)),
+            (graph_to_matrix(54, net), graph_to_matrix(45, net), graph_to_matrix(33, net), graph_to_matrix(9, net))],
 
-        3: [(graph_to_matrix(28, net), graph_to_matrix(31, net), graph_to_matrix(34, net), graph_to_matrix(48, net)),
+        5: [(graph_to_matrix(28, net), graph_to_matrix(31, net), graph_to_matrix(34, net), graph_to_matrix(48, net)),
             (graph_to_matrix(29, net), graph_to_matrix(32, net), graph_to_matrix(35, net), graph_to_matrix(47, net)),
             (graph_to_matrix(30, net), graph_to_matrix(33, net), graph_to_matrix(36, net), graph_to_matrix(46, net))],
 
-        -3: [(graph_to_matrix(48, net), graph_to_matrix(34, net), graph_to_matrix(31, net), graph_to_matrix(28, net)),
+        -5: [(graph_to_matrix(48, net), graph_to_matrix(34, net), graph_to_matrix(31, net), graph_to_matrix(28, net)),
              (graph_to_matrix(47, net), graph_to_matrix(35, net), graph_to_matrix(32, net), graph_to_matrix(29, net)),
              (graph_to_matrix(46, net), graph_to_matrix(36, net), graph_to_matrix(33, net), graph_to_matrix(30, net))],
 
-        5: [(graph_to_matrix(10, net), graph_to_matrix(3, net), graph_to_matrix(36, net), graph_to_matrix(43, net)),
-            (graph_to_matrix(19, net), graph_to_matrix(2, net), graph_to_matrix(27, net), graph_to_matrix(44, net)),
-            (graph_to_matrix(28, net), graph_to_matrix(1, net), graph_to_matrix(18, net), graph_to_matrix(45, net))],
+        3: [(graph_to_matrix(10, net), graph_to_matrix(43, net), graph_to_matrix(36, net), graph_to_matrix(3, net)),
+            (graph_to_matrix(19, net), graph_to_matrix(44, net), graph_to_matrix(27, net), graph_to_matrix(2, net)),
+            (graph_to_matrix(28, net), graph_to_matrix(45, net), graph_to_matrix(18, net), graph_to_matrix(1, net))],
 
-        -5: [(graph_to_matrix(43, net), graph_to_matrix(36, net), graph_to_matrix(1, net), graph_to_matrix(10, net)),
-             (graph_to_matrix(44, net), graph_to_matrix(27, net), graph_to_matrix(2, net), graph_to_matrix(19, net)),
-             (graph_to_matrix(45, net), graph_to_matrix(18, net), graph_to_matrix(1, net), graph_to_matrix(28, net))]
+        -3: [(graph_to_matrix(43, net), graph_to_matrix(10, net), graph_to_matrix(3, net), graph_to_matrix(36, net)),
+             (graph_to_matrix(44, net), graph_to_matrix(19, net), graph_to_matrix(2, net), graph_to_matrix(27, net)),
+             (graph_to_matrix(45, net), graph_to_matrix(28, net), graph_to_matrix(1, net), graph_to_matrix(18, net))]
     }
     for indices in adjacent_indices[face_color]:
         net[(indices[0][1] + indices[0][2] - 1) // 9][(indices[0][1] + indices[0][2] - 1) % 9], net[(indices[1][1] + indices[1][2] - 1) // 9][(indices[1][1] + indices[1][2] - 1) % 9], net[(indices[2][1] + indices[2][2] - 1) // 9][(indices[2][1] + indices[2][2] - 1) % 9], net[(indices[3][1] + indices[3][2] - 1) // 9][(indices[3][1] + indices[3][2] - 1) % 9] = net[(indices[3][1] + indices[3][2] - 1) // 9][(indices[3][1] + indices[3][2] - 1) % 9], net[(indices[0][1] + indices[0][2] - 1) // 9][(indices[0][1] + indices[0][2] - 1) % 9], net[(indices[1][1] + indices[1][2] - 1) // 9][(indices[1][1] + indices[1][2] - 1) % 9], net[(indices[2][1] + indices[2][2] - 1) // 9][(indices[2][1] + indices[2][2] - 1) % 9]
@@ -174,22 +174,42 @@ def matrix_to_graph(net):
             orange.update({i - nine_counter})
         if color == 5:
             red.update({i - nine_counter})
+    blue.difference_update({26})
+    green.difference_update({20})
+    white.difference_update({23})
+    yellow.difference_update({50})
+    orange.difference_update({5})
+    red.difference_update({41})
     return blue, green, white, yellow, orange, red
 
 
-def calculate_white_cross_pairs(white, pairs, net):
-    white_targetColor_pairs = []
+def calculate_white_cross_pair_per_color(white, pairs, net, color):
+    pairy = []
     for pair in pairs:
         nine_counter = 0
         node = 0
         intersection = pair.intersection(white)
         if intersection:
             other_node = pair.difference(intersection).pop()
+            if graph_to_matrix(other_node, net)[0] != color:
+                continue
             white_node = intersection.pop()
             while node - nine_counter < other_node:
                 if net[node // 9][node % 9] == 9:
                     nine_counter += 1
                 node += 1
-            white_targetColor_pairs.append(
+            pairy.append(
                 (white_node, net[(other_node + nine_counter - 1) // 9][(other_node + nine_counter - 1) % 9]))
-    return white_targetColor_pairs
+            break
+    return pairy[0]
+
+
+def same_number_of_edges_condition(path, edges_list_1, edges_list_2):
+    count_edges_list_1 = 0
+    count_edges_list_2 = 0
+    for i in range(len(path) - 1):
+        if (path[i], path[i + 1]) in edges_list_1:
+            count_edges_list_1 += 1
+        if (path[i], path[i + 1]) in edges_list_2:
+            count_edges_list_2 += 1
+    return count_edges_list_1 == count_edges_list_2
