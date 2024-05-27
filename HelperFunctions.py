@@ -145,7 +145,14 @@ def rotate_entre_face(net, face_color):
              (graph_to_matrix(45, net), graph_to_matrix(28, net), graph_to_matrix(1, net), graph_to_matrix(18, net))]
     }
     for indices in adjacent_indices[face_color]:
-        net[(indices[0][1] + indices[0][2] - 1) // 9][(indices[0][1] + indices[0][2] - 1) % 9], net[(indices[1][1] + indices[1][2] - 1) // 9][(indices[1][1] + indices[1][2] - 1) % 9], net[(indices[2][1] + indices[2][2] - 1) // 9][(indices[2][1] + indices[2][2] - 1) % 9], net[(indices[3][1] + indices[3][2] - 1) // 9][(indices[3][1] + indices[3][2] - 1) % 9] = net[(indices[3][1] + indices[3][2] - 1) // 9][(indices[3][1] + indices[3][2] - 1) % 9], net[(indices[0][1] + indices[0][2] - 1) // 9][(indices[0][1] + indices[0][2] - 1) % 9], net[(indices[1][1] + indices[1][2] - 1) // 9][(indices[1][1] + indices[1][2] - 1) % 9], net[(indices[2][1] + indices[2][2] - 1) // 9][(indices[2][1] + indices[2][2] - 1) % 9]
+        net[(indices[0][1] + indices[0][2] - 1) // 9][(indices[0][1] + indices[0][2] - 1) % 9], \
+            net[(indices[1][1] + indices[1][2] - 1) // 9][(indices[1][1] + indices[1][2] - 1) % 9], \
+            net[(indices[2][1] + indices[2][2] - 1) // 9][(indices[2][1] + indices[2][2] - 1) % 9], \
+            net[(indices[3][1] + indices[3][2] - 1) // 9][(indices[3][1] + indices[3][2] - 1) % 9] \
+            = net[(indices[3][1] + indices[3][2] - 1) // 9][(indices[3][1] + indices[3][2] - 1) % 9], \
+            net[(indices[0][1] + indices[0][2] - 1) // 9][(indices[0][1] + indices[0][2] - 1) % 9], \
+            net[(indices[1][1] + indices[1][2] - 1) // 9][(indices[1][1] + indices[1][2] - 1) % 9], \
+            net[(indices[2][1] + indices[2][2] - 1) // 9][(indices[2][1] + indices[2][2] - 1) % 9]
     return net
 
 
@@ -184,24 +191,17 @@ def matrix_to_graph(net):
 
 
 def calculate_white_cross_pair_per_color(white, pairs, net, color):
-    pairy = []
+    temp = []
     for pair in pairs:
-        nine_counter = 0
-        node = 0
         intersection = pair.intersection(white)
         if intersection:
             other_node = pair.difference(intersection).pop()
             if graph_to_matrix(other_node, net)[0] != color:
                 continue
             white_node = intersection.pop()
-            while node - nine_counter < other_node:
-                if net[node // 9][node % 9] == 9:
-                    nine_counter += 1
-                node += 1
-            pairy.append(
-                (white_node, net[(other_node + nine_counter - 1) // 9][(other_node + nine_counter - 1) % 9]))
+            temp.append((white_node, graph_to_matrix(other_node, net)[0]))
             break
-    return pairy[0]
+    return temp[0]
 
 
 def same_number_of_edges_condition(path, edges_list_1, edges_list_2):
@@ -212,4 +212,34 @@ def same_number_of_edges_condition(path, edges_list_1, edges_list_2):
             count_edges_list_1 += 1
         if (path[i], path[i + 1]) in edges_list_2:
             count_edges_list_2 += 1
-    return count_edges_list_1 == count_edges_list_2
+    return count_edges_list_1 % 4 == count_edges_list_2 % 4
+
+
+def color_pair_to_appropriate_corner(color1, color2, corners):
+    possible_stickers = []
+    if color1 == 0 or color2 == 0:
+        possible_stickers.extend([18, 36])
+    if color1 == 5 or color2 == 5:
+        possible_stickers.extend([43, 45])
+    if color1 == 1 or color2 == 1:
+        possible_stickers.extend([10, 28])
+    if color1 == 4 or color2 == 4:
+        possible_stickers.extend([1, 3])
+    for corner in corners:
+        for i, j in [(a, b) for idx, a in enumerate(possible_stickers) for b in possible_stickers[idx + 1:]]:
+            if len({i, j}.intersection(corner)) == 2:
+                return corner.difference({i, j}), i, j
+
+
+def num_to_color(num):
+    if num == 0:
+        return "blue"
+    if num == 1:
+        return "green"
+    if num == 2:
+        return "white"
+    if num == 3:
+        return "yellow"
+    if num == 4:
+        return "orange"
+    return "red"
